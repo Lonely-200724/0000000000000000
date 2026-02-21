@@ -3,141 +3,163 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>بساطة - إزالة الخلفية</title>
+    <title>المحرر الدقيق - إزالة الخلفية</title>
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Segoe UI', system-ui, sans-serif;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
 
         body {
-            background: #f0f2f5;
+            background: #1e1e2f;
             min-height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
-            padding: 10px;
+            padding: 15px;
         }
 
         .app {
-            max-width: 1300px;
+            max-width: 1400px;
             width: 100%;
-            background: white;
-            border-radius: 24px;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            background: #2d2d3a;
+            border-radius: 30px;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
             overflow: hidden;
         }
 
-        /* رأس بسيط */
+        /* رأس التطبيق */
         .header {
-            background: white;
-            padding: 16px 24px;
-            border-bottom: 1px solid #eee;
+            background: #252532;
+            padding: 20px 30px;
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: 10px;
+            border-bottom: 1px solid #3d3d4e;
         }
 
         .header h1 {
-            font-size: 22px;
+            color: white;
+            font-size: 24px;
             font-weight: 600;
-            color: #1a1a1a;
         }
 
         .header span {
-            font-size: 24px;
+            font-size: 28px;
         }
 
-        /* شريط الأدوات الرئيسي - بسيط وواضح */
+        /* شريط الأدوات الرئيسي */
         .toolbar {
             display: flex;
             flex-wrap: wrap;
-            gap: 8px;
-            padding: 16px 24px;
-            background: white;
-            border-bottom: 1px solid #eee;
+            gap: 10px;
+            padding: 20px 30px;
+            background: #2a2a35;
+            border-bottom: 1px solid #3d3d4e;
         }
 
         .btn {
-            padding: 12px 20px;
+            padding: 12px 25px;
             border: none;
             border-radius: 40px;
             font-size: 15px;
-            font-weight: 500;
+            font-weight: 600;
             cursor: pointer;
             display: inline-flex;
             align-items: center;
             gap: 8px;
             transition: all 0.2s;
-            background: #f5f5f5;
-            color: #333;
-            border: 1px solid #e0e0e0;
+            background: #3d3d4e;
+            color: white;
+            border: 1px solid #4d4d62;
         }
 
         .btn:hover {
-            background: #e8e8e8;
-            transform: translateY(-1px);
+            background: #4d4d62;
+            transform: translateY(-2px);
         }
 
         .btn-primary {
-            background: #0066ff;
-            color: white;
+            background: #4361ee;
             border: none;
         }
 
         .btn-primary:hover {
-            background: #0052cc;
+            background: #3a56d4;
         }
 
         .btn-success {
-            background: #00b894;
-            color: white;
+            background: #06d6a0;
             border: none;
+            color: #1e1e2f;
         }
 
         .btn-success:hover {
-            background: #00a187;
+            background: #05bf8b;
         }
 
-        /* منطقة اختيار اللون - بسيطة جداً */
-        .color-area {
+        .btn-danger {
+            background: #ef476f;
+            border: none;
+        }
+
+        .btn-danger:hover {
+            background: #d63e62;
+        }
+
+        .btn-warning {
+            background: #ff9f1c;
+            border: none;
+            color: #1e1e2f;
+        }
+
+        .btn-warning:hover {
+            background: #f08c0f;
+        }
+
+        /* شريط اختيار اللون */
+        .color-bar {
             display: flex;
             flex-wrap: wrap;
             align-items: center;
-            gap: 16px;
-            padding: 12px 24px;
-            background: #fafafa;
-            border-bottom: 1px solid #eee;
+            gap: 20px;
+            padding: 15px 30px;
+            background: #252532;
+            border-bottom: 1px solid #3d3d4e;
         }
 
-        .color-picker-simple {
+        .color-display {
             display: flex;
             align-items: center;
-            gap: 8px;
-            background: white;
-            padding: 4px 12px 4px 4px;
+            gap: 12px;
+            background: #2d2d3a;
+            padding: 6px 15px 6px 6px;
             border-radius: 40px;
-            border: 1px solid #ddd;
+            border: 1px solid #4d4d62;
         }
 
         #selectedColorBox {
-            width: 32px;
-            height: 32px;
+            width: 35px;
+            height: 35px;
             border-radius: 50%;
-            border: 2px solid white;
-            box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+            border: 3px solid #4d4d62;
         }
 
-        .eyedropper-simple {
-            background: #0066ff;
+        .color-label {
+            color: #aaa;
+            font-size: 14px;
+        }
+
+        .eyedropper-btn {
+            background: #4361ee;
             color: white;
             border: none;
-            width: 40px;
-            height: 40px;
+            width: 45px;
+            height: 45px;
             border-radius: 50%;
-            font-size: 20px;
+            font-size: 22px;
             cursor: pointer;
             display: flex;
             align-items: center;
@@ -145,185 +167,248 @@
             transition: all 0.2s;
         }
 
-        .eyedropper-simple.active {
-            background: #00b894;
-            transform: scale(1.05);
+        .eyedropper-btn.active {
+            background: #06d6a0;
+            transform: scale(1.1);
         }
 
-        .tolerance-simple {
+        .tolerance-control {
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 15px;
             flex: 1;
-            min-width: 200px;
+            min-width: 250px;
         }
 
-        .tolerance-simple label {
-            color: #666;
+        .tolerance-control label {
+            color: #aaa;
             font-size: 14px;
             white-space: nowrap;
         }
 
-        #toleranceSimple {
+        #toleranceRange {
             flex: 1;
-            height: 4px;
-            border-radius: 2px;
-            background: #ddd;
-            accent-color: #0066ff;
+            height: 6px;
+            border-radius: 3px;
+            background: #3d3d4e;
+            accent-color: #4361ee;
         }
 
-        #toleranceValueSimple {
+        #toleranceValue {
             min-width: 35px;
-            color: #0066ff;
+            color: #4361ee;
             font-weight: 600;
+            text-align: center;
         }
 
-        /* منطقة العمل - بسيطة وواضحة */
+        /* منطقة العمل */
         .workspace {
             display: flex;
-            gap: 16px;
-            padding: 16px;
-            background: #f5f5f5;
+            gap: 20px;
+            padding: 20px;
+            background: #1a1a26;
         }
 
-        .canvas-wrapper {
+        /* حاوية الكانفاس */
+        .canvas-container {
             flex: 3;
-            background: #2d2d2d;
-            border-radius: 20px;
+            background: #0f0f17;
+            border-radius: 24px;
             overflow: hidden;
-            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+            box-shadow: 0 20px 30px -10px rgba(0, 0, 0, 0.5);
             position: relative;
-            aspect-ratio: 16/10;
+            aspect-ratio: 13/18; /* نسبة 13:18 سم */
         }
 
-        #mainCanvas {
+        canvas {
             width: 100%;
             height: 100%;
             display: block;
-            cursor: grab;
-            background: repeating-conic-gradient(#404040 0% 25%, #505050 0% 50%) 50% / 30px 30px;
+            background: repeating-conic-gradient(#2d2d3a 0% 25%, #3d3d4e 0% 50%) 50% / 30px 30px;
         }
 
-        #mainCanvas:active {
-            cursor: grabbing;
+        /* مؤشر الدائرة - هذا اللي يظهر مكان الماوس */
+        .brush-cursor {
+            position: fixed;
+            width: 40px;
+            height: 40px;
+            border: 3px solid white;
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 1000;
+            display: none;
+            transform: translate(-50%, -50%);
+            box-shadow: 0 0 15px rgba(0,0,0,0.5);
+            mix-blend-mode: difference;
         }
 
-        /* الشريط الجانبي - بسيط جداً */
+        /* الشريط الجانبي */
         .sidebar {
             flex: 1;
-            background: white;
-            border-radius: 20px;
-            padding: 16px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            background: #252532;
+            border-radius: 24px;
+            padding: 20px;
             display: flex;
             flex-direction: column;
-            gap: 16px;
+            gap: 20px;
         }
 
-        .tool-section {
-            background: #f8f9fa;
-            border-radius: 16px;
-            padding: 16px;
+        /* أدوات الفرشاة */
+        .tools-section {
+            background: #2d2d3a;
+            border-radius: 20px;
+            padding: 18px;
         }
 
         .section-title {
-            font-size: 14px;
-            color: #666;
-            margin-bottom: 12px;
+            color: white;
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 15px;
             display: flex;
             align-items: center;
-            gap: 6px;
-        }
-
-        /* أدوات بسيطة */
-        .simple-brush-tools {
-            display: flex;
             gap: 8px;
-            margin-bottom: 12px;
         }
 
-        .brush-option {
+        .brush-tools {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+
+        .tool-btn {
             flex: 1;
-            padding: 12px;
+            padding: 14px;
             border: none;
             border-radius: 30px;
-            font-size: 14px;
-            font-weight: 500;
+            font-size: 15px;
+            font-weight: 600;
             cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
             gap: 6px;
             transition: all 0.2s;
-            background: white;
-            border: 1px solid #ddd;
+            background: #3d3d4e;
+            color: #aaa;
+            border: 1px solid #4d4d62;
         }
 
-        .brush-option.eraser {
-            color: #e74c3c;
-        }
-
-        .brush-option.eraser.active {
-            background: #e74c3c;
+        .tool-btn.eraser.active {
+            background: #ef476f;
             color: white;
-            border-color: #e74c3c;
+            border-color: #ef476f;
         }
 
-        .brush-option.restore {
-            color: #00b894;
+        .tool-btn.restore.active {
+            background: #06d6a0;
+            color: #1e1e2f;
+            border-color: #06d6a0;
         }
 
-        .brush-option.restore.active {
-            background: #00b894;
+        /* زر إلغاء التحديد (جديد!) */
+        .cancel-tool-btn {
+            width: 100%;
+            padding: 14px;
+            background: #4d4d62;
             color: white;
-            border-color: #00b894;
-        }
-
-        .size-control {
+            border: none;
+            border-radius: 30px;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
             display: flex;
             align-items: center;
-            gap: 10px;
+            justify-content: center;
+            gap: 8px;
+            margin-bottom: 15px;
+            transition: all 0.2s;
         }
 
-        #brushSizeSimple {
-            flex: 1;
-            height: 4px;
-            border-radius: 2px;
-            accent-color: #0066ff;
+        .cancel-tool-btn:hover {
+            background: #5d5d7a;
         }
 
-        #brushSizeValueSimple {
-            min-width: 40px;
+        /* التحكم بالحجم */
+        .size-control {
+            margin-top: 15px;
+        }
+
+        .size-label {
+            display: flex;
+            justify-content: space-between;
+            color: #aaa;
+            margin-bottom: 8px;
+        }
+
+        #brushSizeRange {
+            width: 100%;
+            height: 6px;
+            border-radius: 3px;
+            background: #3d3d4e;
+            accent-color: #4361ee;
+        }
+
+        /* خلفيات */
+        .backgrounds-section {
+            background: #2d2d3a;
+            border-radius: 20px;
+            padding: 18px;
+        }
+
+        /* رفع خلفية من الجهاز */
+        .upload-bg {
+            background: #3d3d4e;
+            border-radius: 30px;
+            padding: 15px;
+            margin-bottom: 15px;
             text-align: center;
-            color: #0066ff;
-            font-weight: 600;
+            cursor: pointer;
+            border: 2px dashed #4d4d62;
+            transition: all 0.2s;
         }
 
-        /* خلفيات بسيطة */
-        .backgrounds-grid {
+        .upload-bg:hover {
+            background: #4d4d62;
+            border-color: #06d6a0;
+        }
+
+        .upload-bg label {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            color: white;
+            cursor: pointer;
+        }
+
+        #bgFileInput {
+            display: none;
+        }
+
+        /* خلفيات سريعة */
+        .quick-bg {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
             gap: 8px;
-            margin-top: 8px;
         }
 
         .bg-item {
             aspect-ratio: 1;
             border-radius: 12px;
             cursor: pointer;
-            border: 2px solid transparent;
+            border: 3px solid transparent;
             transition: all 0.2s;
             overflow: hidden;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
         }
 
         .bg-item:hover {
-            transform: scale(0.98);
+            transform: scale(0.95);
+            border-color: #06d6a0;
         }
 
         .bg-item.selected {
-            border-color: #0066ff;
-            transform: scale(0.98);
+            border-color: #4361ee;
         }
 
         .bg-color {
@@ -337,114 +422,134 @@
             object-fit: cover;
         }
 
-        /* تعليمات بسيطة */
-        .tips {
-            background: #f0f7ff;
-            border-radius: 12px;
-            padding: 12px;
-            font-size: 13px;
-            color: #0066ff;
+        /* معلومات الحجم */
+        .size-info {
+            background: #2d2d3a;
+            border-radius: 20px;
+            padding: 18px;
+            color: white;
         }
 
-        .tips p {
+        .size-detail {
             display: flex;
-            align-items: center;
-            gap: 8px;
-            margin: 6px 0;
+            justify-content: space-between;
+            margin: 8px 0;
+            color: #aaa;
+        }
+
+        .size-detail span:last-child {
+            color: #06d6a0;
+            font-weight: 600;
         }
 
         /* تذييل */
         .footer {
-            padding: 16px 24px;
-            background: white;
-            border-top: 1px solid #eee;
-            color: #999;
-            font-size: 13px;
+            padding: 15px 30px;
+            background: #252532;
+            color: #6d6d8a;
             text-align: center;
+            font-size: 13px;
+            border-top: 1px solid #3d3d4e;
         }
     </style>
 </head>
 <body>
     <div class="app">
-        <!-- رأس بسيط -->
+        <!-- الهيدر -->
         <div class="header">
-            <span>✨</span>
-            <h1>بساطة - إزالة الخلفية</h1>
+            <span>🎯</span>
+            <h1>المحرر الدقيق - إزالة الخلفية</h1>
         </div>
 
-        <!-- شريط الأدوات الرئيسي - 4 أزرار فقط -->
+        <!-- شريط الأدوات الرئيسي -->
         <div class="toolbar">
-            <button class="btn" id="uploadBtn">
-                <span>📸</span> صورة
+            <button class="btn" id="uploadImageBtn">
+                <span>📸</span> إضافة صورة
             </button>
             <button class="btn btn-primary" id="removeBgBtn">
-                <span>✂️</span> إزالة
+                <span>✂️</span> إزالة الخلفية
             </button>
             <button class="btn btn-success" id="addBgBtn">
-                <span>🖼️</span> خلفية
+                <span>🖼️</span> إضافة خلفية
             </button>
-            <button class="btn" id="saveBtn">
-                <span>💾</span> حفظ
+            <button class="btn btn-danger" id="saveBtn">
+                <span>💾</span> حفظ الصورة
             </button>
-            <input type="file" id="fileInput" accept="image/*" style="display: none;">
+            <input type="file" id="imageInput" accept="image/*" style="display: none;">
         </div>
 
-        <!-- اختيار اللون - بسيط جداً -->
-        <div class="color-area">
-            <div class="color-picker-simple">
-                <div id="selectedColorBox" style="background-color: #00ff00;"></div>
-                <span style="color: #666; font-size: 14px;">اللون المستهدف</span>
+        <!-- شريط اختيار اللون -->
+        <div class="color-bar">
+            <div class="color-display">
+                <div id="selectedColorBox" style="background: #00ff00;"></div>
+                <span class="color-label">اللون المستهدف</span>
             </div>
-            
-            <button class="eyedropper-simple" id="eyedropperSimple" title="اختر اللون من الصورة">
+
+            <button class="eyedropper-btn" id="eyedropperBtn" title="اختر اللون من الصورة">
                 🖌️
             </button>
 
-            <div class="tolerance-simple">
+            <div class="tolerance-control">
                 <label>الحساسية:</label>
-                <input type="range" id="toleranceSimple" min="5" max="60" value="30">
-                <span id="toleranceValueSimple">30</span>
+                <input type="range" id="toleranceRange" min="5" max="60" value="30">
+                <span id="toleranceValue">30</span>
             </div>
         </div>
 
         <!-- منطقة العمل -->
         <div class="workspace">
-            <!-- الكانفاس -->
-            <div class="canvas-wrapper">
+            <!-- حاوية الكانفاس -->
+            <div class="canvas-container" id="canvasContainer">
                 <canvas id="mainCanvas"></canvas>
             </div>
 
-            <!-- شريط جانبي بسيط -->
+            <!-- الشريط الجانبي -->
             <div class="sidebar">
                 <!-- أدوات الفرشاة -->
-                <div class="tool-section">
+                <div class="tools-section">
                     <div class="section-title">
-                        <span>🖌️</span> تعديل يدوي
+                        <span>🖌️</span> أدوات التحرير
                     </div>
-                    
-                    <div class="simple-brush-tools">
-                        <button class="brush-option eraser" id="eraserSimple">
-                            <span>🧽</span> مسح
+
+                    <!-- زر إلغاء التحديد (جديد!) -->
+                    <button class="cancel-tool-btn" id="cancelToolBtn">
+                        <span>❌</span> إلغاء التحديد
+                    </button>
+
+                    <div class="brush-tools">
+                        <button class="tool-btn eraser" id="eraserBtn">
+                            <span>🧽</span> ممحاة
                         </button>
-                        <button class="brush-option restore" id="restoreSimple">
+                        <button class="tool-btn restore" id="restoreBtn">
                             <span>🔄</span> استعادة
                         </button>
                     </div>
 
                     <div class="size-control">
-                        <span style="color: #666;">📏</span>
-                        <input type="range" id="brushSizeSimple" min="5" max="40" value="20">
-                        <span id="brushSizeValueSimple">20</span>
+                        <div class="size-label">
+                            <span>حجم الفرشاة</span>
+                            <span id="brushSizeDisplay">20px</span>
+                        </div>
+                        <input type="range" id="brushSizeRange" min="5" max="50" value="20">
                     </div>
                 </div>
 
-                <!-- خلفيات بسيطة -->
-                <div class="tool-section">
+                <!-- خلفيات -->
+                <div class="backgrounds-section">
                     <div class="section-title">
-                        <span>🌈</span> خلفيات سريعة
+                        <span>🌈</span> الخلفيات
                     </div>
-                    
-                    <div class="backgrounds-grid">
+
+                    <!-- رفع خلفية من الجهاز -->
+                    <div class="upload-bg" id="uploadBgArea">
+                        <label for="bgFileInput">
+                            <span>📁</span> اختر خلفية من جهازك
+                        </label>
+                        <input type="file" id="bgFileInput" accept="image/*">
+                    </div>
+
+                    <!-- خلفيات سريعة -->
+                    <div class="quick-bg">
                         <div class="bg-item" data-type="color" data-color="#ff0000">
                             <div class="bg-color" style="background: #ff0000;"></div>
                         </div>
@@ -475,48 +580,69 @@
                     </div>
                 </div>
 
-                <!-- نصائح سريعة -->
-                <div class="tips">
-                    <p>🖱️ اسحب الصورة لتحريكها</p>
-                    <p>🔍 عجلة الماوس للتكبير</p>
-                    <p>🎯 اضغط على القطارة ثم اختر اللون</p>
-                    <p>⏎ Shift + سحب لتحريك الخلفية</p>
+                <!-- معلومات الحجم -->
+                <div class="size-info">
+                    <div class="section-title">
+                        <span>📐</span> أبعاد الصورة
+                    </div>
+                    <div class="size-detail">
+                        <span>الحجم المطلوب:</span>
+                        <span>١٣ × ١٨ سم</span>
+                    </div>
+                    <div class="size-detail">
+                        <span>دقة الطباعة:</span>
+                        <span>٣٠٠ بكسل/بوصة</span>
+                    </div>
+                    <div style="background: #3d3d4e; height: 1px; margin: 10px 0;"></div>
+                    <div style="color: #aaa; font-size: 13px;">
+                        <p>🖱️ <strong>الفرشاة:</strong> اضغط واسحب للحذف/الاستعادة</p>
+                        <p>🎯 <strong>الدائرة:</strong> تظهر مكان الماوس</p>
+                        <p>⌨️ <strong>Shift + سحب:</strong> لتحريك الخلفية</p>
+                        <p>🔍 <strong>عجلة الماوس:</strong> للتكبير/التصغير</p>
+                    </div>
                 </div>
             </div>
         </div>
 
         <!-- تذييل -->
         <div class="footer">
-            تصميم بسيط وسهل - اضف صورتك وازل الخلفية بنقرة واحدة
+            اضغط على القطارة 🖌️ ثم انقر على اللون المراد إزالته | الفرشاة تعمل فقط عند الضغط والسحب
         </div>
     </div>
+
+    <!-- مؤشر الدائرة (اللي يظهر مكان الماوس) -->
+    <div class="brush-cursor" id="brushCursor"></div>
 
     <script>
         // === تهيئة الكانفاس ===
         const canvas = document.getElementById('mainCanvas');
         const ctx = canvas.getContext('2d', { willReadFrequently: true });
+        const container = document.getElementById('canvasContainer');
         
-        // ضبط حجم الكانفاس
-        let canvasWidth = 900;
-        let canvasHeight = 560;
+        // ضبط حجم الكانفاس بنسبة 13:18
+        const containerRect = container.getBoundingClientRect();
+        let canvasWidth = 800;
+        let canvasHeight = 1108; // نسبة 13:18
+        
         canvas.width = canvasWidth;
         canvas.height = canvasHeight;
 
-        // === المتغيرات الأساسية ===
+        // === المتغيرات العامة ===
         let originalImage = null;
         let processedImage = null;
         let backgroundImage = null;
         
-        // لون الهدف
-        let targetColor = { r: 0, g: 255, b: 0 }; // أخضر
-        
-        // الإعدادات
+        // اللون المستهدف
+        let targetColor = { r: 0, g: 255, b: 0 };
         let tolerance = 30;
+        
+        // القطارة
         let isEyedropperActive = false;
         
-        // أدوات الرسم
-        let currentTool = null;
+        // أدوات الفرشاة
+        let currentTool = null; // 'eraser', 'restore', أو null
         let isDrawing = false;
+        let brushSize = 20;
         
         // تحريك العناصر
         let imageX = 0, imageY = 0, imageScale = 1;
@@ -525,36 +651,47 @@
         let isDraggingBg = false;
         let dragStart = { x: 0, y: 0 };
 
+        // مؤشر الدائرة
+        const brushCursor = document.getElementById('brushCursor');
+
         // === عناصر التحكم ===
-        const uploadBtn = document.getElementById('uploadBtn');
-        const fileInput = document.getElementById('fileInput');
+        const uploadImageBtn = document.getElementById('uploadImageBtn');
+        const imageInput = document.getElementById('imageInput');
         const removeBgBtn = document.getElementById('removeBgBtn');
         const addBgBtn = document.getElementById('addBgBtn');
         const saveBtn = document.getElementById('saveBtn');
-        const eyedropperSimple = document.getElementById('eyedropperSimple');
+        const eyedropperBtn = document.getElementById('eyedropperBtn');
         const selectedColorBox = document.getElementById('selectedColorBox');
-        const toleranceSimple = document.getElementById('toleranceSimple');
-        const toleranceValueSimple = document.getElementById('toleranceValueSimple');
-        const eraserSimple = document.getElementById('eraserSimple');
-        const restoreSimple = document.getElementById('restoreSimple');
-        const brushSizeSimple = document.getElementById('brushSizeSimple');
-        const brushSizeValueSimple = document.getElementById('brushSizeValueSimple');
+        const toleranceRange = document.getElementById('toleranceRange');
+        const toleranceValue = document.getElementById('toleranceValue');
+        const eraserBtn = document.getElementById('eraserBtn');
+        const restoreBtn = document.getElementById('restoreBtn');
+        const cancelToolBtn = document.getElementById('cancelToolBtn');
+        const brushSizeRange = document.getElementById('brushSizeRange');
+        const brushSizeDisplay = document.getElementById('brushSizeDisplay');
+        const bgFileInput = document.getElementById('bgFileInput');
+        const uploadBgArea = document.getElementById('uploadBgArea');
         const bgItems = document.querySelectorAll('.bg-item');
 
         // === تحديث القيم ===
-        toleranceSimple.addEventListener('input', () => {
-            tolerance = parseInt(toleranceSimple.value);
-            toleranceValueSimple.textContent = tolerance;
+        toleranceRange.addEventListener('input', () => {
+            tolerance = parseInt(toleranceRange.value);
+            toleranceValue.textContent = tolerance;
         });
 
-        brushSizeSimple.addEventListener('input', () => {
-            brushSizeValueSimple.textContent = brushSizeSimple.value;
+        brushSizeRange.addEventListener('input', () => {
+            brushSize = parseInt(brushSizeRange.value);
+            brushSizeDisplay.textContent = brushSize + 'px';
+            
+            // تحديث حجم دائرة المؤشر
+            brushCursor.style.width = brushSize * 2 + 'px';
+            brushCursor.style.height = brushSize * 2 + 'px';
         });
 
         // === رفع الصورة ===
-        uploadBtn.addEventListener('click', () => fileInput.click());
+        uploadImageBtn.addEventListener('click', () => imageInput.click());
         
-        fileInput.addEventListener('change', (e) => {
+        imageInput.addEventListener('change', (e) => {
             const file = e.target.files[0];
             if (!file) return;
             
@@ -567,8 +704,8 @@
                     
                     // توسيط الصورة
                     imageScale = Math.min(
-                        canvasWidth / img.width * 0.8,
-                        canvasHeight / img.height * 0.8,
+                        canvasWidth / img.width * 0.9,
+                        canvasHeight / img.height * 0.9,
                         1
                     );
                     imageX = (canvasWidth - img.width * imageScale) / 2;
@@ -582,10 +719,19 @@
         });
 
         // === القطارة ===
-        eyedropperSimple.addEventListener('click', () => {
+        eyedropperBtn.addEventListener('click', () => {
             isEyedropperActive = !isEyedropperActive;
-            eyedropperSimple.classList.toggle('active');
-            canvas.style.cursor = isEyedropperActive ? 'crosshair' : 'grab';
+            eyedropperBtn.classList.toggle('active');
+            
+            if (isEyedropperActive) {
+                canvas.style.cursor = 'crosshair';
+                brushCursor.style.display = 'none';
+            } else {
+                canvas.style.cursor = 'grab';
+                if (currentTool) {
+                    brushCursor.style.display = 'block';
+                }
+            }
         });
 
         // اختيار اللون من الصورة
@@ -609,20 +755,23 @@
                 const pixel = tempCtx.getImageData(imgX, imgY, 1, 1).data;
                 targetColor = { r: pixel[0], g: pixel[1], b: pixel[2] };
                 
-                // تحديث المربع
                 selectedColorBox.style.backgroundColor = `rgb(${pixel[0]}, ${pixel[1]}, ${pixel[2]})`;
                 
-                // إلغاء القطارة
+                // إلغاء تفعيل القطارة
                 isEyedropperActive = false;
-                eyedropperSimple.classList.remove('active');
-                canvas.style.cursor = 'grab';
+                eyedropperBtn.classList.remove('active');
+                canvas.style.cursor = currentTool ? 'none' : 'grab';
+                
+                if (currentTool) {
+                    brushCursor.style.display = 'block';
+                }
             }
         });
 
         // === إزالة الخلفية ===
         removeBgBtn.addEventListener('click', () => {
             if (!originalImage) {
-                alert('أضف صورة أولاً');
+                alert('الرجاء إضافة صورة أولاً');
                 return;
             }
             
@@ -661,20 +810,54 @@
             newImg.src = tempCanvas.toDataURL();
         });
 
-        // === أدوات الرسم ===
-        eraserSimple.addEventListener('click', () => {
+        // === أدوات الفرشاة ===
+        eraserBtn.addEventListener('click', () => {
             currentTool = 'eraser';
-            eraserSimple.classList.add('active');
-            restoreSimple.classList.remove('active');
+            eraserBtn.classList.add('active');
+            restoreBtn.classList.remove('active');
+            canvas.style.cursor = 'none';
+            brushCursor.style.display = 'block';
+            
+            // تحديث لون الدائرة
+            brushCursor.style.borderColor = '#ef476f';
         });
 
-        restoreSimple.addEventListener('click', () => {
+        restoreBtn.addEventListener('click', () => {
             currentTool = 'restore';
-            restoreSimple.classList.add('active');
-            eraserSimple.classList.remove('active');
+            restoreBtn.classList.add('active');
+            eraserBtn.classList.remove('active');
+            canvas.style.cursor = 'none';
+            brushCursor.style.display = 'block';
+            
+            // تحديث لون الدائرة
+            brushCursor.style.borderColor = '#06d6a0';
         });
 
-        // وظيفة الرسم
+        // === زر إلغاء التحديد (جديد!) ===
+        cancelToolBtn.addEventListener('click', () => {
+            currentTool = null;
+            eraserBtn.classList.remove('active');
+            restoreBtn.classList.remove('active');
+            canvas.style.cursor = 'grab';
+            brushCursor.style.display = 'none';
+        });
+
+        // === حركة مؤشر الدائرة ===
+        canvas.addEventListener('mousemove', (e) => {
+            if (!currentTool) return;
+            
+            const rect = canvas.getBoundingClientRect();
+            const mouseX = e.clientX;
+            const mouseY = e.clientY;
+            
+            // تحديث موقع الدائرة
+            brushCursor.style.left = mouseX + 'px';
+            brushCursor.style.top = mouseY + 'px';
+            brushCursor.style.width = brushSize * 2 + 'px';
+            brushCursor.style.height = brushSize * 2 + 'px';
+        });
+
+        // === الرسم (يشتغل فقط عند الضغط والسحب) ===
         function handleDraw(e) {
             if (!isDrawing || !currentTool || !processedImage) return;
             
@@ -696,12 +879,10 @@
             const imageData = tempCtx.getImageData(0, 0, tempCanvas.width, tempCanvas.height);
             const data = imageData.data;
             
-            const size = parseInt(brushSizeSimple.value);
-            
-            for (let y = -size; y <= size; y++) {
-                for (let x = -size; x <= size; x++) {
+            for (let y = -brushSize; y <= brushSize; y++) {
+                for (let x = -brushSize; x <= brushSize; x++) {
                     const dist = Math.sqrt(x * x + y * y);
-                    if (dist <= size) {
+                    if (dist <= brushSize) {
                         const px = imgX + x;
                         const py = imgY + y;
                         
@@ -709,7 +890,7 @@
                             const idx = (py * tempCanvas.width + px) * 4;
                             
                             if (currentTool === 'eraser') {
-                                data[idx + 3] = 0;
+                                data[idx + 3] = 0; // شفاف
                             } else if (currentTool === 'restore' && originalImage) {
                                 const origCanvas = document.createElement('canvas');
                                 const origCtx = origCanvas.getContext('2d');
@@ -745,9 +926,11 @@
             const mouseY = e.clientY - rect.top;
             
             if (currentTool) {
+                // إذا كانت أداة الفرشاة محددة، نبدأ الرسم عند الضغط
                 isDrawing = true;
                 handleDraw(e);
             } else {
+                // إذا ما في أداة، نبدأ التحريك
                 if (e.shiftKey && backgroundImage) {
                     isDraggingBg = true;
                     dragStart.x = mouseX - bgX;
@@ -788,6 +971,15 @@
 
         canvas.addEventListener('mouseleave', () => {
             isDrawing = false;
+            isDraggingImage = false;
+            isDraggingBg = false;
+            brushCursor.style.display = 'none';
+        });
+
+        canvas.addEventListener('mouseenter', () => {
+            if (currentTool) {
+                brushCursor.style.display = 'block';
+            }
         });
 
         // === تكبير وتصغير بالعجلة ===
@@ -819,7 +1011,26 @@
             drawCanvas();
         });
 
-        // === اختيار الخلفيات ===
+        // === رفع خلفية من الجهاز ===
+        uploadBgArea.addEventListener('click', () => bgFileInput.click());
+        
+        bgFileInput.addEventListener('change', (e) => {
+            const file = e.target.files[0];
+            if (!file) return;
+            
+            const reader = new FileReader();
+            reader.onload = (event) => {
+                const img = new Image();
+                img.onload = () => {
+                    backgroundImage = img;
+                    drawCanvas();
+                };
+                img.src = event.target.result;
+            };
+            reader.readAsDataURL(file);
+        });
+
+        // === اختيار خلفيات سريعة ===
         bgItems.forEach(item => {
             item.addEventListener('click', () => {
                 const type = item.dataset.type;
@@ -850,7 +1061,6 @@
                     bgImg.src = url;
                 }
                 
-                // تحديد العنصر
                 bgItems.forEach(i => i.classList.remove('selected'));
                 item.classList.add('selected');
             });
@@ -869,9 +1079,9 @@
                 ctx.restore();
             } else {
                 // خلفية شفافة
-                ctx.fillStyle = '#404040';
+                ctx.fillStyle = '#2d2d3a';
                 ctx.fillRect(0, 0, canvasWidth, canvasHeight);
-                ctx.fillStyle = '#505050';
+                ctx.fillStyle = '#3d3d4e';
                 for (let i = 0; i < canvasWidth; i += 40) {
                     for (let j = 0; j < canvasHeight; j += 40) {
                         ctx.fillRect(i, j, 20, 20);
@@ -903,10 +1113,9 @@
             link.click();
         });
 
-        // === إظهار الخلفيات عند الضغط (خيار بسيط) ===
+        // === إظهار الخلفيات ===
         addBgBtn.addEventListener('click', () => {
-            // بسيط: فقط نوجه المستخدم للخلفيات في الشريط الجانبي
-            alert('اختر خلفية من الشريط الجانبي 👈');
+            bgFileInput.click();
         });
 
         // رسم أولي
